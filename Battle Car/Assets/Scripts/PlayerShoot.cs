@@ -2,29 +2,40 @@
 using UnityEngine.Networking;
 using System.Collections;
 
+
+[RequireComponent(typeof ( WeaponManager))]
 public class PlayerShoot : NetworkBehaviour
 {
 
     private const string PLAYER_TAG = "Player";
     public PlayerWeapon weapon;
     public GameObject line_of_sight;
-
     LineRenderer line;
 
 
+
+    private PlayerWeapon currentWeapon;
+    private WeaponManager weaponManager;
+
+    
     [SerializeField]
     private LayerMask mask;
 
     void Start()
     {
+        //DebugRays
         line = gameObject.GetComponentInChildren<LineRenderer>();
         line.enabled = false;
 
-        
+
+        weaponManager = GetComponent<WeaponManager>();
+
     }
 
     void Update()
     {
+
+        currentWeapon = weaponManager.GetCurrentWeapon();
         if (Input.GetButtonDown("Fire1"))
         {
 
@@ -58,11 +69,12 @@ public class PlayerShoot : NetworkBehaviour
             Debug.Log(_hit.collider.gameObject.name);
             if (_hit.collider.gameObject.tag == PLAYER_TAG)
             {
-
-
                 Transform hit_gameObject = _hit.collider.gameObject.transform.parent.parent;
+                CmdPlayerShot(hit_gameObject.name, currentWeapon.damage);
+
+
+                //DebugLogs
                 Debug.Log(hit_gameObject.name + "got hit");
-                CmdPlayerShot(hit_gameObject.name, weapon.damage);
                 Player _player = GameManager.GetPlayer(hit_gameObject.name);
                 Debug.Log(_player.name + " has been shot.");
             }
