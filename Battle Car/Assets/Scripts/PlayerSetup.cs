@@ -3,7 +3,8 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 [RequireComponent(typeof(Player))]
-public class PlayerSetup : NetworkBehaviour {
+public class PlayerSetup : NetworkBehaviour
+{
     [SerializeField]
     Behaviour[] componentsToDisable;
 
@@ -13,9 +14,9 @@ public class PlayerSetup : NetworkBehaviour {
 
     Camera sceneCamera;
 
-	void Start ()
+    void Start()
     {
-        if(!isLocalPlayer)
+        if (!isLocalPlayer)
         {
             DisableComponents();
             AssignRemoteLayer();
@@ -23,12 +24,13 @@ public class PlayerSetup : NetworkBehaviour {
         else
         {
             sceneCamera = Camera.main;
-            if(sceneCamera != null)
+            if (sceneCamera != null)
             {
                 sceneCamera.gameObject.SetActive(false);
             }
-        }
 
+        }
+        GetComponent<Player>().Setup();
     }
 
     public override void OnStartClient()
@@ -41,7 +43,7 @@ public class PlayerSetup : NetworkBehaviour {
 
 
 
-    void AssignRemoteLayer ()
+    void AssignRemoteLayer()
     {
         gameObject.layer = LayerMask.NameToLayer(remoteLayerName);
     }
@@ -56,7 +58,7 @@ public class PlayerSetup : NetworkBehaviour {
 
     private void OnDisable()
     {
-        if(sceneCamera != null)
+        if (sceneCamera != null)
         {
             sceneCamera.gameObject.SetActive(true);
         }

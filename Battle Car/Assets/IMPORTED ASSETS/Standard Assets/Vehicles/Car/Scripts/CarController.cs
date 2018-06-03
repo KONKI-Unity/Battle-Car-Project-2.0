@@ -16,10 +16,12 @@ namespace UnityStandardAssets.Vehicles.Car
         KPH
     }
 
+  
     public class CarController : MonoBehaviour
     {
         [SerializeField] private CarDriveType m_CarDriveType = CarDriveType.FourWheelDrive;
         [SerializeField] private WheelCollider[] m_WheelColliders = new WheelCollider[4];
+   
         [SerializeField] private GameObject[] m_WheelMeshes = new GameObject[4];
         [SerializeField] private WheelEffects[] m_WheelEffects = new WheelEffects[4];
         [SerializeField] private Vector3 m_CentreOfMassOffset;
@@ -54,10 +56,11 @@ namespace UnityStandardAssets.Vehicles.Car
         public float MaxSpeed{get { return m_Topspeed; }}
         public float Revs { get; private set; }
         public float AccelInput { get; private set; }
-
+        private Animator animator;
         // Use this for initialization
         private void Start()
         {
+            animator = GetComponent<Animator>();
             m_WheelMeshLocalRotations = new Quaternion[4];
             for (int i = 0; i < 4; i++)
             {
@@ -144,6 +147,7 @@ namespace UnityStandardAssets.Vehicles.Car
                 
                 m_WheelMeshes[i].transform.position = position;
                 m_WheelMeshes[i].transform.rotation = new_quat;
+
             }
 
             //clamp input values
@@ -157,7 +161,7 @@ namespace UnityStandardAssets.Vehicles.Car
             m_SteerAngle = steering*m_MaximumSteerAngle;
             m_WheelColliders[0].steerAngle = m_SteerAngle;
             m_WheelColliders[1].steerAngle = m_SteerAngle;
-
+           
             SteerHelper();
             ApplyDrive(accel, footbrake);
             CapSpeed();

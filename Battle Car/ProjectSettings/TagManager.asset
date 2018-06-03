@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Fire
+  - PLAYER_TAG
   layers:
   - Default
   - TransparentFX
