@@ -30,6 +30,7 @@ public class Player : NetworkBehaviour
     [SerializeField]
     private GameObject spawnEffect;
 
+    private bool firstSetup = true;
 
     private int currentTurbo = 100;
 
@@ -68,11 +69,19 @@ public class Player : NetworkBehaviour
     [ClientRpc]
     private void RpcSetupPlayerOnAllClients()
     {
-        wasEnabled = new bool[disableOnDeath.Length];
-        for (int i = 0; i < wasEnabled.Length; i++)
+
+        if (firstSetup)
         {
-            wasEnabled[i] = disableOnDeath[i].enabled;
+            wasEnabled = new bool[disableOnDeath.Length];
+            for (int i = 0; i < wasEnabled.Length; i++)
+            {
+                wasEnabled[i] = disableOnDeath[i].enabled;
+            }
+
+            firstSetup = false;
         }
+
+        
 
         SetDefaults();
     }
@@ -164,7 +173,6 @@ public class Player : NetworkBehaviour
         transform.rotation = _spawnPoint.rotation;
 
         yield return new WaitForSeconds(0.1f);
-       
 
         Setup();
 
