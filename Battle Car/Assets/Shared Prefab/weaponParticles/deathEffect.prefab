@@ -173,7 +173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4717831873369726}
   m_Layer: 0
-  m_Name: Explosion
+  m_Name: deathEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

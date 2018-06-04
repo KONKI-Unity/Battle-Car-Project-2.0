@@ -3901,6 +3901,8 @@ MonoBehaviour:
   maxTurbo: 100
   deathEffect: {fileID: 1916983856878928, guid: e4442e5a6fc354c4ba7c74b164e48f0b,
     type: 2}
+  spawnEffect: {fileID: 1657239703649242, guid: ff7178157ee6c2d4aa0ba139fb7dc0e9,
+    type: 2}
   disableOnDeath:
   - {fileID: 114624681844900776}
   - {fileID: 114562143356119296}
@@ -4044,6 +4046,7 @@ MonoBehaviour:
   remoteLayerName: remotePlayer
   playerUIPrefab: {fileID: 1684717588344038, guid: fc8469afa49732446ac5f427d6b7ac97,
     type: 2}
+  playerUIInstance: {fileID: 0}
 --- !u!114 &114624681844900776
 MonoBehaviour:
   m_ObjectHideFlags: 1

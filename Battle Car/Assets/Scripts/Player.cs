@@ -27,6 +27,9 @@ public class Player : NetworkBehaviour
     [SerializeField]
     private GameObject deathEffect;
 
+    [SerializeField]
+    private GameObject spawnEffect;
+
 
     private int currentTurbo = 100;
 
@@ -103,7 +106,7 @@ public class Player : NetworkBehaviour
 
         //Spawn death effects
         GameObject deathEffectIns = (GameObject) Instantiate(deathEffect, transform.position, Quaternion.identity);
-        Destroy(deathEffect, 3f);
+        Destroy(deathEffectIns, 3f);
 
         //Switch cameras
         if (isLocalPlayer)
@@ -131,12 +134,11 @@ public class Player : NetworkBehaviour
     private IEnumerator Respawn()
     {
         yield return new WaitForSeconds(GameManager.instance.matchSettings.respawnTime);
-
-        SetDefaults();
+        
         Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
         transform.position = _spawnPoint.position;
         transform.rotation = _spawnPoint.rotation;
-
+        SetDefaults();
         Debug.Log(transform.name + " respawned.");
     }
 
@@ -172,6 +174,10 @@ public class Player : NetworkBehaviour
             GameManager.instance.SetSceneCameraActive(false);
             GetComponent<PlayerSetup>().playerUIInstance.SetActive(true);
         }
+
+        //Create Spawn Effect
+        GameObject spawnEffectIns = (GameObject)Instantiate(spawnEffect, transform.position, Quaternion.identity);
+        Destroy(spawnEffectIns, 3f);
     }
 
 }
