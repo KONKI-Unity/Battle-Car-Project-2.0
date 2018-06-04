@@ -14,10 +14,10 @@ public class PlayerSetup : NetworkBehaviour
     string remoteLayerName = "remotePlayer";
     [SerializeField]
     GameObject playerUIPrefab;
-    private GameObject playerUIInstance;
+    [HideInInspector]
+    public GameObject playerUIInstance;
 
-
-    Camera sceneCamera;
+    
 
     void Start()
     {
@@ -28,24 +28,20 @@ public class PlayerSetup : NetworkBehaviour
         }
         else
         {
-            sceneCamera = Camera.main;
-            if (sceneCamera != null)
-            {
-                sceneCamera.gameObject.SetActive(false);
-            }
             
+            //Create Player UI
+            playerUIInstance = Instantiate(playerUIPrefab);
+            playerUIInstance.name = playerUIPrefab.name;
+
+            //Configure PlayerUI
+            PlayerUI ui = playerUIInstance.GetComponent<PlayerUI>();
+            if (ui == null)
+                Debug.Log("No PlayerUI component on PlayerUI Prefab");
+            ui.SetController(GetComponent<CarUserControl>());
+
         }
+
         GetComponent<Player>().Setup();
-        //Create Player UI
-        playerUIInstance = Instantiate(playerUIPrefab);
-        playerUIInstance.name = playerUIPrefab.name;
-
-        //Configure PlayerUI
-        PlayerUI ui = playerUIInstance.GetComponent<PlayerUI>();
-        if (ui == null)
-            Debug.Log("No PlayerUI component on PlayerUI Prefab");
-        ui.SetController(GetComponent<CarUserControl>());
-
 
     }
 
@@ -75,10 +71,7 @@ public class PlayerSetup : NetworkBehaviour
     private void OnDisable()
     {
         Destroy(playerUIInstance);
-        if (sceneCamera != null)
-        {
-            sceneCamera.gameObject.SetActive(true);
-        }
+        GameManager.instance.SetSceneCameraActive(true);
 
         GameManager.UnRegisterPlayer(transform.name);
     }

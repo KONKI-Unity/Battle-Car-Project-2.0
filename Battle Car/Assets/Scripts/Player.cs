@@ -2,6 +2,7 @@
 using UnityEngine.Networking;
 using System.Collections;
 
+[RequireComponent(typeof(PlayerSetup))]
 public class Player : NetworkBehaviour
 {
     [SyncVar]
@@ -23,6 +24,9 @@ public class Player : NetworkBehaviour
     [SerializeField]
     private int maxTurbo = 100;
 
+    [SerializeField]
+    private GameObject deathEffect;
+
 
     private int currentTurbo = 100;
 
@@ -32,6 +36,9 @@ public class Player : NetworkBehaviour
     [SerializeField]
     private Behaviour[] disableOnDeath;
     private bool[] wasEnabled;
+
+    [SerializeField]
+    private GameObject[] disableGameObjectsOnDeath;
 
     public void Setup()
     {
@@ -75,14 +82,35 @@ public class Player : NetworkBehaviour
     {
         isDead = true;
 
+
+        //Disable components
         for (int i = 0; i < disableOnDeath.Length; i++)
         {
             disableOnDeath[i].enabled = false;
         }
 
+        //Disable components
+        for (int i = 0; i < disableGameObjectsOnDeath.Length; i++)
+        {
+            disableGameObjectsOnDeath[i].SetActive(false);
+        }
+
+
+        //Disable Collider
         Collider _col = GetComponent<Collider>();
         if (_col != null)
             _col.enabled = false;
+
+        //Spawn death effects
+        GameObject deathEffectIns = (GameObject) Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(deathEffect, 3f);
+
+        //Switch cameras
+        if (isLocalPlayer)
+        {
+            GameManager.instance.SetSceneCameraActive(true);
+            GetComponent<PlayerSetup>().playerUIInstance.SetActive(false);
+        }
 
         Debug.Log(transform.name + " is DEAD!");
 
@@ -117,11 +145,19 @@ public class Player : NetworkBehaviour
         isDead = false;
         currentHealth = maxHealth;
 
+        //Set Components active
         for (int i = 0; i < disableOnDeath.Length; i++)
         {
             disableOnDeath[i].enabled = wasEnabled[i];
         }
 
+        //Enable GameObjects
+        for (int i = 0; i < disableGameObjectsOnDeath.Length; i++)
+        {
+            disableGameObjectsOnDeath[i].SetActive(true);
+        }
+
+        //Enable Colliders
         Collider _col = GetComponent<Collider>();
         if (_col == null)
         {
@@ -129,6 +165,13 @@ public class Player : NetworkBehaviour
         }
         if (_col != null)
             _col.enabled = true;
+
+        //Switch cameras
+        if (isLocalPlayer)
+        {
+            GameManager.instance.SetSceneCameraActive(false);
+            GetComponent<PlayerSetup>().playerUIInstance.SetActive(true);
+        }
     }
 
 }

@@ -4176,8 +4176,8 @@ MonoBehaviour:
   - {fileID: 1244951739434818}
   - {fileID: 1819457115560306}
   CarObject: {fileID: 1987297825157636}
-  nitroBurnSpeed: 1
-  nitroRegenSpeed: 0.3
+  nitroBurnSpeed: 100
+  nitroRegenSpeed: 50
 --- !u!114 &114970092284010790
 MonoBehaviour:
   m_ObjectHideFlags: 1
