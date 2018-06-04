@@ -24,9 +24,9 @@ namespace UnityStandardAssets.Vehicles.Car
         private float maxTurbo = 100f;
 
         [SerializeField]
-        private float nitroBurnSpeed = 1f;
+        private float nitroBurnSpeed = 6f;
         [SerializeField]
-        private float nitroRegenSpeed = 0.3f;
+        private float nitroRegenSpeed = 2;
 
         public float GetTurboAmount()
         {
@@ -74,7 +74,7 @@ namespace UnityStandardAssets.Vehicles.Car
             bool turbo = Input.GetKey(KeyCode.C);
             if (turbo && turboAmount > 0.5f)
             {
-                Debug.Log("Turbooo !!");
+                //Debug.Log("Turbooo !!");
                 turboAmount -= nitroBurnSpeed * Time.deltaTime;
             }
             else
@@ -83,6 +83,9 @@ namespace UnityStandardAssets.Vehicles.Car
             }
 
             turboAmount = Mathf.Clamp(turboAmount, 0f, maxTurbo);
+
+            if (animator != null)
+                animator.SetFloat("ForwardVelocity", CrossPlatformInputManager.GetAxis("Horizontal"));
         }
 
 

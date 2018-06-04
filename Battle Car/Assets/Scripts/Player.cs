@@ -18,7 +18,7 @@ public class Player : NetworkBehaviour
     [SerializeField]
     private int maxArmor = 100;
 
-    private int cuurentArmor = 100;
+    private int currentArmor = 100;
 
     [SerializeField]
     private int maxTurbo = 100;
@@ -53,11 +53,7 @@ public class Player : NetworkBehaviour
     {
         return maxTurbo;
     }
-
-    public int GetCurrentTurbo()
-    {
-        return currentTurbo;
-    }
+    
 
     [ClientRpc]
     public void RpcTakeDamage(int _amount)

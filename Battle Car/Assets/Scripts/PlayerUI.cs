@@ -24,7 +24,7 @@ public class PlayerUI : MonoBehaviour {
     void SetFuelAmount(float _amount, float _max)
     {
         
-        float turboPercentage = ((_amount * 100) / _max);
+        float turboPercentage = (_amount / 100);
         turboFill.localScale = new Vector3(1f, turboPercentage, 1f);
 
 
