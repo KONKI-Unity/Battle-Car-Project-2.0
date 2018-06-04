@@ -16,10 +16,37 @@ namespace UnityStandardAssets.Vehicles.Car
         [SerializeField]
         private GameObject CarObject;
 
+
+
+        private Player player;
+        private float turboAmount = 1f;
+
+        private float maxTurbo = 100f;
+
+        [SerializeField]
+        private float nitroBurnSpeed = 1f;
+        [SerializeField]
+        private float nitroRegenSpeed = 0.3f;
+
+        public float GetTurboAmount()
+        {
+            return turboAmount;
+        }
+
+        public float GetMaxTurbo()
+        {
+            return maxTurbo;
+        }
+
+
         void Start()
         {
+            maxTurbo = player.GetMaxTurbo();
+            turboAmount = 0f;
 
             animator = GetComponent<Animator>();
+            if (animator == null)
+                Debug.Log("No Animator found");
 
         }
 
@@ -30,6 +57,9 @@ namespace UnityStandardAssets.Vehicles.Car
         }
         private void Update()
         {
+            
+
+            //Wheels Spinning
             if (wheels.Length == 4)
             {
                 for (int i = 0; i < 4; i++)
@@ -38,6 +68,19 @@ namespace UnityStandardAssets.Vehicles.Car
                     wheels[i].transform.Rotate(0, -m_Car.CurrentSpeed*100 / (60 * 360 * Time.deltaTime), 0);
                 }
             }
+
+            bool turbo = Input.GetKey(KeyCode.C);
+            if (turbo && turboAmount > 0.5f)
+            {
+                Debug.Log("Turbooo !!");
+                turboAmount -= nitroBurnSpeed * Time.deltaTime;
+            }
+            else
+            {
+                turboAmount += nitroRegenSpeed * Time.deltaTime;
+            }
+
+            turboAmount = Mathf.Clamp(turboAmount, 0f, maxTurbo);
         }
 
 
@@ -46,16 +89,19 @@ namespace UnityStandardAssets.Vehicles.Car
             // pass the input to the car!
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             float v = CrossPlatformInputManager.GetAxis("Vertical");
+            
+
 #if !MOBILE_INPUT
             float handbrake = CrossPlatformInputManager.GetAxis("Jump");
-            m_Car.Move(h, v, v, handbrake);
+            m_Car.Move(h, v, v, handbrake, Input.GetKey(KeyCode.C));
 #else
-            m_Car.Move(h, v, v, 0f);
+            m_Car.Move(h, v, v, 0f, turbo);
 #endif
-            
-                
+
+
             //Debug.Log("Speed : " + m_Car.CurrentSpeed);
-            animator.SetFloat("ForwardVelocity", h);
+            if (animator != null)
+                animator.SetFloat("ForwardVelocity", h);
            
         }
     }

@@ -38,6 +38,7 @@ namespace UnityStandardAssets.Vehicles.Car
         [SerializeField] private float m_RevRangeBoundary = 1f;
         [SerializeField] private float m_SlipLimit;
         [SerializeField] private float m_BrakeTorque;
+        [SerializeField] private float turboAmount = 500f;
 
         private Quaternion[] m_WheelMeshLocalRotations;
         private Vector3 m_Prevpos, m_Pos;
@@ -129,7 +130,7 @@ namespace UnityStandardAssets.Vehicles.Car
         }
 
 
-        public void Move(float steering, float accel, float footbrake, float handbrake)
+        public void Move(float steering, float accel, float footbrake, float handbrake, bool turbo)
         {
             for (int i = 0; i < 4; i++)
             {
@@ -163,7 +164,7 @@ namespace UnityStandardAssets.Vehicles.Car
             m_WheelColliders[1].steerAngle = m_SteerAngle;
            
             SteerHelper();
-            ApplyDrive(accel, footbrake);
+            ApplyDrive(accel, footbrake, turbo);
             CapSpeed();
 
             //Set the handbrake.
@@ -206,14 +207,18 @@ namespace UnityStandardAssets.Vehicles.Car
         }
 
 
-        private void ApplyDrive(float accel, float footbrake)
+        private void ApplyDrive(float accel, float footbrake, bool turbo)
         {
 
             float thrustTorque;
+            
+
             switch (m_CarDriveType)
             {
                 case CarDriveType.FourWheelDrive:
                     thrustTorque = accel * (m_CurrentTorque / 4f);
+                    if (turbo)
+                        thrustTorque += turboAmount;
                     for (int i = 0; i < 4; i++)
                     {
                         m_WheelColliders[i].motorTorque = thrustTorque;
@@ -222,11 +227,15 @@ namespace UnityStandardAssets.Vehicles.Car
 
                 case CarDriveType.FrontWheelDrive:
                     thrustTorque = accel * (m_CurrentTorque / 2f);
+                    if (turbo)
+                        thrustTorque += turboAmount;
                     m_WheelColliders[0].motorTorque = m_WheelColliders[1].motorTorque = thrustTorque;
                     break;
 
                 case CarDriveType.RearWheelDrive:
                     thrustTorque = accel * (m_CurrentTorque / 2f);
+                    if (turbo)
+                        thrustTorque += turboAmount;
                     m_WheelColliders[2].motorTorque = m_WheelColliders[3].motorTorque = thrustTorque;
                     break;
 

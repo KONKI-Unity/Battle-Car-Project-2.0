@@ -1,8 +1,10 @@
 ﻿
+using UnityStandardAssets.Vehicles.Car;
 using UnityEngine;
 using UnityEngine.Networking;
 
 [RequireComponent(typeof(Player))]
+[RequireComponent(typeof(CarUserControl))]
 public class PlayerSetup : NetworkBehaviour
 {
     [SerializeField]
@@ -31,12 +33,18 @@ public class PlayerSetup : NetworkBehaviour
             {
                 sceneCamera.gameObject.SetActive(false);
             }
-
+            
         }
         GetComponent<Player>().Setup();
         //Create Player UI
         playerUIInstance = Instantiate(playerUIPrefab);
         playerUIInstance.name = playerUIPrefab.name;
+
+        //Configure PlayerUI
+        PlayerUI ui = playerUIInstance.GetComponent<PlayerUI>();
+        if (ui == null)
+            Debug.Log("No PlayerUI component on PlayerUI Prefab");
+        ui.SetController(GetComponent<CarUserControl>());
 
 
     }

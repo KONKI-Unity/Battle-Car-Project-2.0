@@ -15,6 +15,17 @@ public class Player : NetworkBehaviour
     [SerializeField]
     private int maxHealth = 100;
 
+    [SerializeField]
+    private int maxArmor = 100;
+
+    private int cuurentArmor = 100;
+
+    [SerializeField]
+    private int maxTurbo = 100;
+
+
+    private int currentTurbo = 100;
+
     [SyncVar]    //Sync Var in every Clients of the game
     private int currentHealth;
 
@@ -36,6 +47,16 @@ public class Player : NetworkBehaviour
     public int GetCurrentHealth()
     {
         return currentHealth;
+    }
+
+    public int GetMaxTurbo()
+    {
+        return maxTurbo;
+    }
+
+    public int GetCurrentTurbo()
+    {
+        return currentTurbo;
     }
 
     [ClientRpc]

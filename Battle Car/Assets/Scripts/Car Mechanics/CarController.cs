@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class CarController : MonoBehaviour {
 
@@ -25,6 +26,8 @@ public class CarController : MonoBehaviour {
 
 	public Text speedText;
     public Rigidbody rb;
+
+    public int CurrentSpeed { get; internal set; }
 
     void Start() {
         rb = GetComponent<Rigidbody>();
@@ -103,4 +106,8 @@ public class CarController : MonoBehaviour {
 			                             WheelR.transform.position); 
 	}
 
+    internal void Move(float h, float v1, float v2, float handbrake, bool turbo)
+    {
+        throw new NotImplementedException();
+    }
 }
