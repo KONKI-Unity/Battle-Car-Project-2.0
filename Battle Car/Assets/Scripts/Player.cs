@@ -43,7 +43,30 @@ public class Player : NetworkBehaviour
     [SerializeField]
     private GameObject[] disableGameObjectsOnDeath;
 
+
+    private GameObject uiInstance;
+
     public void Setup()
+    {
+        //Switch cameras
+        if (isLocalPlayer)
+        {
+            GameManager.instance.SetSceneCameraActive(false);
+            uiInstance = GetComponent<PlayerSetup>().playerUIInstance;
+            uiInstance.SetActive(true);
+        }
+        CmdBroadCastNewPlayerSetup();
+    }
+
+    [Command]
+    private void CmdBroadCastNewPlayerSetup()
+    {
+        RpcSetupPlayerOnAllClients();
+
+    }
+
+    [ClientRpc]
+    private void RpcSetupPlayerOnAllClients()
     {
         wasEnabled = new bool[disableOnDeath.Length];
         for (int i = 0; i < wasEnabled.Length; i++)
@@ -112,7 +135,8 @@ public class Player : NetworkBehaviour
         if (isLocalPlayer)
         {
             GameManager.instance.SetSceneCameraActive(true);
-            GetComponent<PlayerSetup>().playerUIInstance.SetActive(false);
+            //GetComponent<PlayerSetup>().playerUIInstance.SetActive(false);
+            uiInstance.SetActive(false);
         }
 
         Debug.Log(transform.name + " is DEAD!");
@@ -138,7 +162,12 @@ public class Player : NetworkBehaviour
         Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
         transform.position = _spawnPoint.position;
         transform.rotation = _spawnPoint.rotation;
-        SetDefaults();
+
+        yield return new WaitForSeconds(0.1f);
+       
+
+        Setup();
+
         Debug.Log(transform.name + " respawned.");
     }
 
@@ -167,13 +196,7 @@ public class Player : NetworkBehaviour
         }
         if (_col != null)
             _col.enabled = true;
-
-        //Switch cameras
-        if (isLocalPlayer)
-        {
-            GameManager.instance.SetSceneCameraActive(false);
-            GetComponent<PlayerSetup>().playerUIInstance.SetActive(true);
-        }
+        
 
         //Create Spawn Effect
         GameObject spawnEffectIns = (GameObject)Instantiate(spawnEffect, transform.position, Quaternion.identity);

@@ -12,6 +12,9 @@ public class PlayerSetup : NetworkBehaviour
 
     [SerializeField]
     string remoteLayerName = "remotePlayer";
+
+
+
     [SerializeField]
     GameObject playerUIPrefab;
     [HideInInspector]
@@ -28,7 +31,7 @@ public class PlayerSetup : NetworkBehaviour
         }
         else
         {
-            
+            Debug.Log("Player ui instance");
             //Create Player UI
             playerUIInstance = Instantiate(playerUIPrefab);
             playerUIInstance.name = playerUIPrefab.name;
@@ -38,10 +41,10 @@ public class PlayerSetup : NetworkBehaviour
             if (ui == null)
                 Debug.Log("No PlayerUI component on PlayerUI Prefab");
             ui.SetController(GetComponent<CarUserControl>());
-
+            GetComponent<Player>().Setup();
         }
+        
 
-        GetComponent<Player>().Setup();
 
     }
 
