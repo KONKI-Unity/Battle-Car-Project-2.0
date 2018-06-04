@@ -45,9 +45,9 @@ public class WeaponManager : NetworkBehaviour {
         if (currentGraphics == null)
             Debug.Log("No WeaponGraphics component on the weapon object :" + _weaponIns.name);
 
-
+        //LAYER WEAPON IS 12 -- Do Not Change it
         if (isLocalPlayer)
-            Util.SetLayerRecursively(_weaponIns, LayerMask.NameToLayer(weaponLayerName));
+            Util.SetLayerRecursively(_weaponIns, 12);
     }
 
 	
