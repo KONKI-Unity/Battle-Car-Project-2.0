@@ -41,12 +41,14 @@ namespace UnityStandardAssets.Vehicles.Car
 
         void Start()
         {
-            maxTurbo = player.GetMaxTurbo();
-            turboAmount = 0f;
-
             animator = GetComponent<Animator>();
             if (animator == null)
                 Debug.Log("No Animator found");
+
+            maxTurbo = player.GetMaxTurbo();
+            turboAmount = 0f;
+
+            
 
         }
 
