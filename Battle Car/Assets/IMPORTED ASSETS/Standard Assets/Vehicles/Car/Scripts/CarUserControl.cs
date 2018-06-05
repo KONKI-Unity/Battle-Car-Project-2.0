@@ -72,7 +72,7 @@ namespace UnityStandardAssets.Vehicles.Car
             }
 
             bool turbo = Input.GetKey(KeyCode.C);
-            if (turbo && turboAmount > 0.5f)
+            if (turbo && turboAmount > 0.5f && !PauseMenu.IsOn)
             {
                 //Debug.Log("Turbooo !!");
                 turboAmount -= nitroBurnSpeed * Time.deltaTime;
@@ -81,6 +81,11 @@ namespace UnityStandardAssets.Vehicles.Car
             {
                 turboAmount += nitroRegenSpeed * Time.deltaTime;
             }
+
+            if (PauseMenu.IsOn)
+                return;
+            
+            
 
             turboAmount = Mathf.Clamp(turboAmount, 0f, maxTurbo);
 
@@ -91,6 +96,9 @@ namespace UnityStandardAssets.Vehicles.Car
 
         private void FixedUpdate()
         {
+            if (PauseMenu.IsOn)
+                return;
+
             // pass the input to the car!
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             float v = CrossPlatformInputManager.GetAxis("Vertical");
