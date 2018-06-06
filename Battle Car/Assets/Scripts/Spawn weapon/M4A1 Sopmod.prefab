@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114025138310581366}
   m_Layer: 0
   m_Name: M4A1 Sopmod
-  m_TagString: Untagged
+  m_TagString: WEAPON_TAG
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,8 +87,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1824312540815758}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.95000005, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalPosition: {x: -6.4277024, y: 1.08, z: 10.50966}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4997810324625474}
   - {fileID: 4666591027749306}
@@ -150,7 +150,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 440cfb1817d9d474ebd936b175a5ace0, type: 2}
+  - {fileID: 2100000, guid: 330795748b36d428b942ead47cca9f4f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -185,7 +185,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: c5e2e68b253dff742a9253d253d81f15, type: 2}
+  - {fileID: 2100000, guid: 330795748b36d428b942ead47cca9f4f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -255,7 +255,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: b64820fbda96a614387a3e1c623dc33f, type: 2}
+  - {fileID: 2100000, guid: 330795748b36d428b942ead47cca9f4f, type: 2}
   - {fileID: 2100000, guid: e1828d8edc6e2ca468c641cdf635739d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -321,3 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnTime: 60
+  weaponParts:
+  - {fileID: 1120091875517548}
+  - {fileID: 1925867259958712}
+  - {fileID: 1840366909315556}

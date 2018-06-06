@@ -67,6 +67,7 @@ GameObject:
   - component: {fileID: 114600100344596944}
   - component: {fileID: 114920621015811652}
   - component: {fileID: 114562143356119296}
+  - component: {fileID: 114149090899785106}
   m_Layer: 9
   m_Name: default
   m_TagString: Player
@@ -1835,7 +1836,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294966495
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 04192d4a611e74a4087952e2cbb5fc2e, type: 2}
+  m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -3835,6 +3836,22 @@ MonoBehaviour:
   depression: 65
   showArcs: 1
   showDebugRay: 1
+--- !u!114 &114149090899785106
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1032034729399146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb5c81e4605640a9a5c5b13caa3adc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryPanel: {fileID: 0}
+  inventoryIcons:
+  - {fileID: 0}
+  weaponNames:
+  - M4A1
 --- !u!114 &114159837670215662
 MonoBehaviour:
   m_ObjectHideFlags: 1
