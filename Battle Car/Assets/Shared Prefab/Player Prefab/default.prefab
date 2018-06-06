@@ -4042,7 +4042,7 @@ MonoBehaviour:
     damage: 11
     range: 100
     fireRate: 0
-    graphics: {fileID: 0}
+    graphics: {fileID: 1572465195911134, guid: 1d3f946a9df797d4a9a6e2a6dc585d29, type: 2}
   line_of_sight: {fileID: 1719366885271428}
   mask:
     serializedVersion: 2
