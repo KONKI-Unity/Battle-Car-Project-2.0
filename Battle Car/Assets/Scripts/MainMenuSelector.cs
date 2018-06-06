@@ -5,7 +5,7 @@ using UnityEngine;
 public class MainMenuSelector : MonoBehaviour {
 
     [SerializeField]
-    private GameObject[] buttonSet;
+    private GameObject[] tabSet;
 
     private int currentTab = 0;
 
@@ -17,9 +17,9 @@ public class MainMenuSelector : MonoBehaviour {
 
     private void Reset()
     {
-        for(int i = 0; i < buttonSet.Length; i++)
+        for(int i = 0; i < tabSet.Length; i++)
         {
-            buttonSet[i].active = false;
+            tabSet[i].SetActive(false);
         }
     }
 
@@ -27,8 +27,8 @@ public class MainMenuSelector : MonoBehaviour {
     {
         currentTab = index;
         Reset();
-        buttonSet[index].active = true;
-        Debug.Log(buttonSet[index].name + " has been loaded");
+        tabSet[index].SetActive(true);
+        Debug.Log(tabSet[index].name + " has been loaded");
 
     }
 
