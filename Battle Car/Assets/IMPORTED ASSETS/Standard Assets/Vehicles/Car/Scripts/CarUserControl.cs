@@ -59,8 +59,19 @@ namespace UnityStandardAssets.Vehicles.Car
         }
         private void Update()
         {
-            
 
+            if (PauseMenu.IsOn)
+            {
+                if (Cursor.lockState != CursorLockMode.None)
+                    Cursor.lockState = CursorLockMode.None;
+
+                return;
+            }
+
+            if (Cursor.lockState != CursorLockMode.Locked)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
             //Wheels Spinning
             if (wheels.Length == 4)
             {

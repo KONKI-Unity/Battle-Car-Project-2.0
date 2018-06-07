@@ -41,11 +41,26 @@ public class PlayerSetup : NetworkBehaviour
             if (ui == null)
                 Debug.Log("No PlayerUI component on PlayerUI Prefab");
             ui.SetController(GetComponent<CarUserControl>());
-            GetComponent<Player>().Setup();
+            GetComponent<Player>().Setup(); string _username = "John Smith";
+
+            if (UserAccountManager.IsLoggedIn)
+                _username = UserAccountManager.PlayerUsername;
+            else
+                _username = transform.name;
+
+            CmdSetUsername(transform.name, _username);
         }
-        
+    }
 
-
+    [Command]
+    void CmdSetUsername(string playerID, string username)
+    {
+        Player player = GameManager.GetPlayer(playerID);
+        if (player != null)
+        {
+            Debug.Log(username + " has joined!");
+            player.username = username;
+        }
     }
 
     public override void OnStartClient()

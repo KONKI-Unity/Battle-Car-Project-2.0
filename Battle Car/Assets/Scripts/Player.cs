@@ -33,7 +33,8 @@ public class Player : NetworkBehaviour
 
     private int currentTurbo = 100;
 
- 
+    [SyncVar]
+    public string username = "Loading...";
 
     public int kills;
     public int deaths;
