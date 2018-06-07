@@ -4092,7 +4092,7 @@ MonoBehaviour:
   - {fileID: 114129237278445294}
   - {fileID: 95652836840800580}
   remoteLayerName: remotePlayer
-  playerUIPrefab: {fileID: 1254229634631060, guid: fc8469afa49732446ac5f427d6b7ac97,
+  playerUIPrefab: {fileID: 1351663849008652, guid: fc8469afa49732446ac5f427d6b7ac97,
     type: 2}
   playerUIInstance: {fileID: 0}
 --- !u!114 &114624681844900776
