@@ -10,7 +10,7 @@ public class PlayerShoot : NetworkBehaviour
     private const string PLAYER_TAG = "Player";
     public PlayerWeapon weapon;
     public GameObject line_of_sight;
-    LineRenderer line;
+
 
 
 
@@ -23,10 +23,6 @@ public class PlayerShoot : NetworkBehaviour
 
     void Start()
     {
-        //DebugRays
-        line = gameObject.GetComponentInChildren<LineRenderer>();
-        line.enabled = false;
-
 
         weaponManager = GetComponent<WeaponManager>();
 
@@ -44,9 +40,6 @@ public class PlayerShoot : NetworkBehaviour
         {
             if (Input.GetButtonDown("Fire1"))
             {
-
-                StopCoroutine("FireLaser");
-                StartCoroutine("FireLaser");
                 Shoot();
             }
         }
@@ -63,20 +56,6 @@ public class PlayerShoot : NetworkBehaviour
         }
     }
 
-    IEnumerator FireLaser()
-    {
-        line.enabled = true;
-        while (Input.GetButtonDown("Fire1"))
-        {
-            Ray ray = new Ray(transform.position, transform.forward);
-
-
-            line.SetPosition(0, ray.origin);
-            line.SetPosition(1, ray.GetPoint(weapon.range));
-            yield return null;
-        }
-        line.enabled = false;
-    }
 
     //Is called on the server when a player shoots
     [Command]
@@ -132,7 +111,7 @@ public class PlayerShoot : NetworkBehaviour
             if (_hit.collider.gameObject.tag == PLAYER_TAG)
             {
                 Transform hit_gameObject = _hit.collider.gameObject.transform.parent.parent;
-                CmdPlayerShot(hit_gameObject.name, currentWeapon.damage);
+                CmdPlayerShot(hit_gameObject.name, currentWeapon.damage, transform.name);
 
 
                 //DebugLogs
@@ -148,11 +127,11 @@ public class PlayerShoot : NetworkBehaviour
     }
 
     [Command]
-    void CmdPlayerShot(string _playerID, int _damage)
+    void CmdPlayerShot(string _playerID, int _damage, string _sourceID)
     {
 
         Player _player = GameManager.GetPlayer(_playerID);
-        _player.RpcTakeDamage(_damage);
+        _player.RpcTakeDamage(_damage, _sourceID);
         Debug.Log(_playerID + " has been shot.");
         int debugPlayerHitHealth = _player.GetCurrentHealth();
         Debug.Log(_playerID + " has now " + debugPlayerHitHealth.ToString());

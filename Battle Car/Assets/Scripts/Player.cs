@@ -18,8 +18,7 @@ public class Player : NetworkBehaviour
 
     [SerializeField]
     private int maxArmor = 100;
-
-    private int currentArmor = 100;
+    
 
     [SerializeField]
     private int maxTurbo = 100;
@@ -34,8 +33,16 @@ public class Player : NetworkBehaviour
 
     private int currentTurbo = 100;
 
-    [SyncVar]    //Sync Var in every Clients of the game
+ 
+
+    public int kills;
+    public int deaths;
+
+    [SyncVar]    
     private int currentHealth;
+
+    [SyncVar]    
+    private int currentArmor;
 
     [SerializeField]
     private Behaviour[] disableOnDeath;
@@ -98,7 +105,7 @@ public class Player : NetworkBehaviour
     
 
     [ClientRpc]
-    public void RpcTakeDamage(int _amount)
+    public void RpcTakeDamage(int _amount, string _sourceID)
     {
         if (isDead)
             return;
@@ -109,14 +116,21 @@ public class Player : NetworkBehaviour
 
         if (currentHealth <= 0)
         {
-            Die();
+            
+            Die(_sourceID);
         }
     }
 
-    private void Die()
+    private void Die(string _sourceID)
     {
         isDead = true;
+        deaths++;
 
+        Player sourcePlayer = GameManager.GetPlayer(_sourceID);
+        if(_sourceID != null && _sourceID != "")
+        {
+            sourcePlayer.kills++;
+        }
 
         //Disable components
         for (int i = 0; i < disableOnDeath.Length; i++)
@@ -160,7 +174,7 @@ public class Player : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.K))
         {
-            RpcTakeDamage(99999);
+            RpcTakeDamage(99999, "");
         }
     }
 

@@ -67,6 +67,7 @@ GameObject:
   - component: {fileID: 114600100344596944}
   - component: {fileID: 114920621015811652}
   - component: {fileID: 114562143356119296}
+  - component: {fileID: 114603087048128794}
   m_Layer: 9
   m_Name: default
   m_TagString: Player
@@ -590,7 +591,6 @@ GameObject:
   - component: {fileID: 4614641632556836}
   - component: {fileID: 20569722365988016}
   - component: {fileID: 124307058752976416}
-  - component: {fileID: 81803692403887782}
   m_Layer: 13
   m_Name: MiniCam
   m_TagString: Player
@@ -3328,13 +3328,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!81 &81803692403887782
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1682833084154198}
-  m_Enabled: 1
 --- !u!81 &81961840962758992
 AudioListener:
   m_ObjectHideFlags: 1
@@ -3902,7 +3895,7 @@ MonoBehaviour:
   m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Target: {fileID: 4165230787670816}
+  m_Target: {fileID: 4869718817535228}
   m_ChildIndex: 0
   m_SendInterval: 0.1
   m_SyncRotationAxis: 1
@@ -3945,6 +3938,8 @@ MonoBehaviour:
     type: 2}
   spawnEffect: {fileID: 1657239703649242, guid: ff7178157ee6c2d4aa0ba139fb7dc0e9,
     type: 2}
+  kills: 0
+  deaths: 0
   disableOnDeath:
   - {fileID: 114624681844900776}
   - {fileID: 114562143356119296}
@@ -3971,22 +3966,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 115
-    i1: 47
-    i2: 30
-    i3: 192
-    i4: 169
-    i5: 115
-    i6: 115
-    i7: 132
-    i8: 203
-    i9: 150
-    i10: 200
-    i11: 51
-    i12: 167
-    i13: 218
-    i14: 173
-    i15: 29
+    i0: 163
+    i1: 1
+    i2: 158
+    i3: 242
+    i4: 245
+    i5: 109
+    i6: 181
+    i7: 20
+    i8: 41
+    i9: 181
+    i10: 240
+    i11: 71
+    i12: 109
+    i13: 75
+    i14: 89
+    i15: 41
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
 --- !u!114 &114500887418726028
@@ -4042,11 +4037,11 @@ MonoBehaviour:
     damage: 11
     range: 100
     fireRate: 0
-    graphics: {fileID: 1572465195911134, guid: 1d3f946a9df797d4a9a6e2a6dc585d29, type: 2}
+    graphics: {fileID: 0}
   line_of_sight: {fileID: 1719366885271428}
   mask:
     serializedVersion: 2
-    m_Bits: 4294966783
+    m_Bits: 4294967295
 --- !u!114 &114600100344596944
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4066,6 +4061,17 @@ MonoBehaviour:
   CarObject: {fileID: 1032034729399146}
   nitroBurnSpeed: 10
   nitroRegenSpeed: 5
+--- !u!114 &114603087048128794
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1032034729399146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7398f10cd7f286e4691cbaa3b9363f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114612068637771650
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4124,11 +4130,11 @@ MonoBehaviour:
   m_ReverseTorque: 500
   m_MaxHandbrakeTorque: 100000000
   m_Downforce: 50.02
-  m_SpeedType: 0
-  m_Topspeed: 170
+  m_SpeedType: 1
+  m_Topspeed: 110
   m_RevRangeBoundary: 1
   m_SlipLimit: 0.8
-  m_BrakeTorque: 20000
+  m_BrakeTorque: 100000
   turboAmount: 0
 --- !u!114 &114634309040064640
 MonoBehaviour:
