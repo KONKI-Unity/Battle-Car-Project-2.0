@@ -8,12 +8,15 @@ public class Scoreboard : MonoBehaviour
     GameObject playerScoreboardItem;
 
     [SerializeField]
+    GameObject playerScoreboardTitle;
+
+    [SerializeField]
     Transform playerScoreboardList;
 
     void OnEnable()
     {
         Player[] players = GameManager.GetAllPlayers();
-
+        Instantiate(playerScoreboardTitle, playerScoreboardList);
         foreach (Player player in players)
         {
             GameObject itemGO = (GameObject)Instantiate(playerScoreboardItem, playerScoreboardList);
