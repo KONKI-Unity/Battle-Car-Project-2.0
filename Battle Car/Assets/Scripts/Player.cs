@@ -131,6 +131,7 @@ public class Player : NetworkBehaviour
         if(_sourceID != null && _sourceID != "")
         {
             sourcePlayer.kills++;
+            GameManager.instance.onPlayerKilledCallback.Invoke(username, sourcePlayer.username, "killed");
         }
 
         //Disable components

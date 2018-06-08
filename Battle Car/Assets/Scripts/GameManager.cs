@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject sceneCamera;
 
+    public delegate void OnPlayerKilledCallback(string player, string source, string action);
+    public OnPlayerKilledCallback onPlayerKilledCallback;
+
     void Awake()
     {
         if (instance != null)
