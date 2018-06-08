@@ -336,16 +336,6 @@ Prefab:
       propertyPath: m_TargetTexture
       value: 
       objectReference: {fileID: 8400000, guid: 04192d4a611e74a4087952e2cbb5fc2e, type: 2}
-    - target: {fileID: 114624681844900776, guid: a3019ef2f56db51429b5f0476d4b5929,
-        type: 2}
-      propertyPath: m_Topspeed
-      value: 110
-      objectReference: {fileID: 0}
-    - target: {fileID: 54941424820525592, guid: a3019ef2f56db51429b5f0476d4b5929,
-        type: 2}
-      propertyPath: m_Mass
-      value: 1000
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a3019ef2f56db51429b5f0476d4b5929, type: 2}
   m_IsPrefabParent: 0
