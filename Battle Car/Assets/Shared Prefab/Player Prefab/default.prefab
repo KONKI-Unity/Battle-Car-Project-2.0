@@ -68,6 +68,7 @@ GameObject:
   - component: {fileID: 114920621015811652}
   - component: {fileID: 114562143356119296}
   - component: {fileID: 114603087048128794}
+  - component: {fileID: 114007567174737796}
   m_Layer: 9
   m_Name: default
   m_TagString: Player
@@ -1288,7 +1289,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1032034729399146}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.66, y: 0.5, z: 2.7295542}
+  m_LocalPosition: {x: 24.28, y: -13.06, z: 8.0862}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4712240597362132}
@@ -3805,6 +3806,18 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114007567174737796
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1032034729399146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f2dfb2c7312b48459f3a25d879aac3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SoundTir: {fileID: 8300000, guid: c65e945f2ebeb784785fbb113c764b5c, type: 3}
 --- !u!114 &114129237278445294
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4139,7 +4152,7 @@ MonoBehaviour:
   m_ReverseTorque: 500
   m_MaxHandbrakeTorque: 100000000
   m_Downforce: 50.02
-  m_SpeedType: 1
+  m_SpeedType: 0
   m_Topspeed: 110
   m_RevRangeBoundary: 1
   m_SlipLimit: 0.8
@@ -4245,14 +4258,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1032034729399146}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20fa55eb64c5cea4aa3c71ae19c434bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   engineSoundStyle: 1
   lowAccelClip: {fileID: 8300000, guid: c4d8928c75c21af43998193f0f038429, type: 3}
-  lowDecelClip: {fileID: 8300000, guid: c4d8928c75c21af43998193f0f038429, type: 3}
+  lowDecelClip: {fileID: 8300000, guid: 5699dddcce16c4543b95951c4ce0e092, type: 3}
   highAccelClip: {fileID: 8300000, guid: 03e3bd08a6e70684dbe299a3e185fdd2, type: 3}
   highDecelClip: {fileID: 8300000, guid: 03bf91d88fce91c41995d27de63cc967, type: 3}
   pitchMultiplier: 0.8
