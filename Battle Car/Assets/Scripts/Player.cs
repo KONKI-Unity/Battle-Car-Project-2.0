@@ -52,6 +52,8 @@ public class Player : NetworkBehaviour
     [SerializeField]
     private GameObject[] disableGameObjectsOnDeath;
 
+    
+
 
     private GameObject uiInstance;
 
@@ -116,9 +118,22 @@ public class Player : NetworkBehaviour
         if (isDead)
             return;
 
-        currentHealth -= _amount;
+        if(currentArmor > 0)
+        {
+            currentArmor -= _amount;
+            if(currentArmor< 0)
+            {
+                currentHealth += currentArmor;
+                currentArmor = 0;
+            }
+        }
+        else
+        {
+            currentHealth -= _amount;
+        }
+        
 
-        Debug.Log(transform.name + " now has " + currentHealth + " health.");
+        Debug.Log(transform.name + " now has " + currentHealth + " health and " + currentArmor + " armor !");
 
         if (currentHealth <= 0)
         {
@@ -204,7 +219,7 @@ public class Player : NetworkBehaviour
     {
         isDead = false;
         currentHealth = maxHealth;
-
+        currentArmor = maxArmor / 2;
         //Set Components active
         for (int i = 0; i < disableOnDeath.Length; i++)
         {
