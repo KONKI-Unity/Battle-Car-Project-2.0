@@ -75,6 +75,10 @@ namespace UnityStandardAssets.Vehicles.Car
             m_CurrentTorque = m_FullTorqueOverAllWheels - (m_TractionControl*m_FullTorqueOverAllWheels);
         }
 
+        private void Update()
+        {
+            GetComponent<AudioSource>().pitch = CurrentSpeed / MaxSpeed + 2f;
+        }
 
         private void GearChanging()
         {

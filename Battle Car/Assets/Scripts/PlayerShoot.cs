@@ -10,7 +10,8 @@ public class PlayerShoot : NetworkBehaviour
     private const string PLAYER_TAG = "Player";
     public PlayerWeapon weapon;
     public GameObject line_of_sight;
-
+    public AudioSource shoot;
+    public AudioSource reload;
 
 
 
@@ -41,6 +42,7 @@ public class PlayerShoot : NetworkBehaviour
             if (Input.GetButtonDown("Reload"))
             {
                 weaponManager.Reload();
+                reload.Play();
                 return;
             }
         }
@@ -49,9 +51,11 @@ public class PlayerShoot : NetworkBehaviour
 
         if(currentWeapon.fireRate <= 0f)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") && Time.time > 0f)
             {
                 Shoot();
+                shoot.Play();
+
             }
         }
         else
@@ -59,6 +63,7 @@ public class PlayerShoot : NetworkBehaviour
             if (Input.GetButtonDown("Fire1"))
             {
                 InvokeRepeating("Shoot", 0f, 1/currentWeapon.fireRate);
+                
             }
             else if( Input.GetButtonUp("Fire1"))
             {
@@ -73,6 +78,9 @@ public class PlayerShoot : NetworkBehaviour
     void CmdOnShoot()
     {
         RpcDoShootEffect();
+        shoot.Play();
+        shoot.pitch = 2.5f;
+
     }
 
     //Is called on all clients to do shoot effects
@@ -111,12 +119,15 @@ public class PlayerShoot : NetworkBehaviour
 
         if (!isLocalPlayer || weaponManager.isReloading)
         {
+            reload.Play();
             return;
         }
 
         if(currentWeapon.bullets <= 0)
         {
             weaponManager.Reload();
+            shoot.Pause();
+           
             return;
         }
 
