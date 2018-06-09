@@ -3870,11 +3870,7 @@ MonoBehaviour:
     damage: 13
     range: 350
     fireRate: 10
-    maxBullets: 30
-    bullets: 30
-    reloadTime: 4
     graphics: {fileID: 1864036526710894, guid: 2ef49bd56335a1a429294d18ce0b4c60, type: 2}
-  isReloading: 0
   weaponGFX: {fileID: 0}
   weaponLayerName: weapon
 --- !u!114 &114218764620200320
@@ -3955,7 +3951,6 @@ MonoBehaviour:
     type: 2}
   spawnEffect: {fileID: 1657239703649242, guid: ff7178157ee6c2d4aa0ba139fb7dc0e9,
     type: 2}
-  username: John Smith
   kills: 0
   deaths: 0
   disableOnDeath:
@@ -4055,9 +4050,6 @@ MonoBehaviour:
     damage: 11
     range: 100
     fireRate: 0
-    maxBullets: 30
-    bullets: 30
-    reloadTime: 4
     graphics: {fileID: 0}
   line_of_sight: {fileID: 1719366885271428}
   mask:
@@ -4112,7 +4104,6 @@ MonoBehaviour:
   - {fileID: 114788448978383830}
   - {fileID: 114129237278445294}
   - {fileID: 95652836840800580}
-  - {fileID: 114562143356119296}
   remoteLayerName: remotePlayer
   playerUIPrefab: {fileID: 1351663849008652, guid: fc8469afa49732446ac5f427d6b7ac97,
     type: 2}
