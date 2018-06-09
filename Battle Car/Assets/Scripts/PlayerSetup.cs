@@ -13,7 +13,10 @@ public class PlayerSetup : NetworkBehaviour
     [SerializeField]
     string remoteLayerName = "remotePlayer";
 
-
+    [SerializeField]
+    string dontDrawLayerName = "dontDraw";
+    [SerializeField]
+    GameObject playerGraphics;
 
     [SerializeField]
     GameObject playerUIPrefab;
@@ -31,6 +34,11 @@ public class PlayerSetup : NetworkBehaviour
         }
         else
         {
+
+            // Disable player graphics for local player
+            SetLayerRecursively(playerGraphics, LayerMask.NameToLayer(dontDrawLayerName));
+
+
             Debug.Log("Player ui instance");
             //Create Player UI
             playerUIInstance = Instantiate(playerUIPrefab);
@@ -62,6 +70,16 @@ public class PlayerSetup : NetworkBehaviour
         {
             Debug.Log(username + " has joined!");
             player.username = username;
+        }
+    }
+
+    void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        obj.layer = newLayer;
+
+        foreach (Transform child in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject, newLayer);
         }
     }
 

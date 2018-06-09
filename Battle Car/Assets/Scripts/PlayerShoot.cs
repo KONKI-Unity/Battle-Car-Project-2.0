@@ -109,7 +109,7 @@ public class PlayerShoot : NetworkBehaviour
     void Shoot()
     {
 
-        if (!isLocalPlayer && weaponManager == false)
+        if (!isLocalPlayer || weaponManager.isReloading)
         {
             return;
         }

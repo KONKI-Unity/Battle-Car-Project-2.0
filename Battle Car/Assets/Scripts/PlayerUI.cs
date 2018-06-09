@@ -6,10 +6,7 @@ public class PlayerUI : MonoBehaviour {
 
     [SerializeField]
     RectTransform turboFill;
-
-    [SerializeField]
-    Text healthBarText;
-
+    
     [SerializeField]
     Text ammoText;
 
@@ -49,7 +46,7 @@ public class PlayerUI : MonoBehaviour {
         if (controller != null)
             SetFuelAmount(controller.GetTurboAmount(), controller.GetMaxTurbo());
 
-        SetAmmoAmount(weaponManager.GetCurrentWeapon().bullets);
+        //SetAmmoAmount(weaponManager.GetCurrentWeapon().bullets);
         SetHealthAmount(player.GetCurrentHealth());
         SetArmorAmount(player.GetCurrentArmor());
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -88,7 +85,7 @@ public class PlayerUI : MonoBehaviour {
 
     void SetHealthAmount(int _amount)
     {
-        healthBarText.text = _amount.ToString();
+        healthText.text = _amount.ToString();
     }
 
     void SetAmmoAmount(int _amount)
