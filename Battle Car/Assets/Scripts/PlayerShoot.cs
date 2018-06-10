@@ -40,6 +40,7 @@ public class PlayerShoot : NetworkBehaviour
         {
             if (Input.GetButtonDown("Reload"))
             {
+                weaponManager.GetCurrentGraphics().reloadSound.Play();
                 weaponManager.Reload();
                 return;
             }
@@ -85,7 +86,14 @@ public class PlayerShoot : NetworkBehaviour
         for(int i = 0; i < weaponManager.GetCurrentGraphics().muzzleFlashs.Length; i++)
         {
             weaponManager.GetCurrentGraphics().muzzleFlashs[i].Play();
+            
         }
+        int x = weaponManager.GetCurrentWeapon().bullets % 2;
+        if (weaponManager.GetCurrentGraphics().cartridgeejject.Length == 2)
+            weaponManager.GetCurrentGraphics().cartridgeejject[x].Play();
+
+        weaponManager.GetCurrentGraphics().gunSound.Play();
+
     }
 
     //Is called when on the server when hit something
