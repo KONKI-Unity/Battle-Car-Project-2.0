@@ -194,10 +194,7 @@ public class Player : NetworkBehaviour
         if (!isLocalPlayer)
             return;
 
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            RpcTakeDamage(99999, "");
-        }
+       
     }
 
     private IEnumerator Respawn()
@@ -219,7 +216,7 @@ public class Player : NetworkBehaviour
     {
         isDead = false;
         currentHealth = maxHealth;
-        currentArmor = maxArmor / 2;
+        currentArmor = maxArmor;
         //Set Components active
         for (int i = 0; i < disableOnDeath.Length; i++)
         {

@@ -80,21 +80,7 @@ public class GameManager : MonoBehaviour
     //}
 
 
-
-
-    void OnGUI()
-    {
-        GUILayout.BeginArea(new Rect(10, 10, 200, 500));
-        GUILayout.BeginVertical();
-
-        foreach (string _playerID in players.Keys)
-        {
-            GUILayout.Label(_playerID + "  -  " + players[_playerID].transform.name);
-        }
-
-        GUILayout.EndVertical();
-        GUILayout.EndArea();
-    }
+        
     #endregion
 
 }
